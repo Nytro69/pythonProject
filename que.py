@@ -20,20 +20,21 @@ class Queue:
 
 def main():
     graph = {
-        "a": ["b"],
+        "a": ["b", "k"],
         "b": ["c", "d", "e", "a"],
         "c": ["b"],
         "d": ["i", "b", "f"],
-        "e": ["b", "f", "h"],
+        "e": ["b", "f"],
         "f": ["d", "e", "g"],
         "g": ["f", "h", "i"],
-        "h": ["e", "g"],
+        "h": ["g", "k"],
         "i": ["d", "g", "j"],
-        "j": ["i"]
+        "j": ["i"],
+        "k": ["h", "a"]
     }
 
-    start = input("start, a-j: ").strip().lower()
-    end = input("end, a-j: ").strip().lower()
+    start = input("start, a-k: ").strip().lower()
+    end = input("end, a-k: ").strip().lower()
 
     if end == start:
         print("Optimal path length:", 0)
