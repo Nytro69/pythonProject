@@ -1,16 +1,3 @@
-# X    0    1    Y
-# 0    0    1    0
-# 0    0    1    0
-# 0    1    1    0
-# 0    0    0    0
-
-# True represents a wall
-# X => (0, 0)
-# Y => (0, 3)
-# out => [(0,0), (0,1), (1,1) ... ]
-# if adjacent == false, set cord in parent pointing to previous
-
-
 def str_reverse(s) -> str:
     if len(s) <= 1:
         return s
@@ -88,5 +75,22 @@ def main():
         [False, True, True, False],
         [False, False, False, False]
     ]
-    print(str_reverse(solve_maze(map, (0, 0), (0, 3))))
+    while True:
+        start1, start2 = input("start, (y, x): ").split(", ")
+        end1, end2 = input("end, (y, x): ").split(", ")
+
+        start1 = int(start1)
+        start2 = int(start2)
+        end1 = int(end1)
+        end2 = int(end2)
+
+        start = (start1, start2)
+        end = (end1, end2)
+
+        if start[0] < 0 or start[0] > len(map) - 1 or start[1] < 0 or start[1] > len(map[0]) - 1 or map[start[0]][start[1]] != False or end[0] < 0 or end[0] > len(map) - 1 or end[1] < 0 or end[1] > len(map[0]) - 1 or map[end[0]][end[1]] != False:
+            print("invalid position")
+            continue
+        else:
+            print(str_reverse(solve_maze(map, start, end)))
+            break
 main()
