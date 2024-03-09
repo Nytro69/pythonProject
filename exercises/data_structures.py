@@ -1,17 +1,4 @@
-def str_reverse(s):
-    if s == None:
-        return ""
-    if len(s) <= 1:
-        return s
-
-    m = len(s) // 2
-
-    half1 = str_reverse(s[:m])
-
-    half2 = str_reverse(s[m:])
-
-    return half2 + half1
-
+from str_reverse import str_reverse
 
 class Queue:
     def __init__(self):
@@ -69,15 +56,15 @@ def solve_maze(map, start, end) -> list:
                     que.enqueue(i)
     print("Path is impossible")
 
-
 def main():
     map = [
-        [False, False, False, True, False],
-        [False, True, True, False, True],
-        [False, False, True, False, False],
-        [False, True, True, True, False],
-        [False, False, False, False, False]
+        [False, False, True, True],
+        [False, False, True, False],
+        [False, False, True, False],
+        [False, True, True, False],
+        [False, False, False, False]
     ]
+
     while True:
         start1, start2 = input("start, (y, x): ").split(", ")
         end1, end2 =input("end,   (y, x): ").split(", ")
@@ -96,6 +83,5 @@ def main():
         else:
             print(str_reverse(solve_maze(map, start, end)))
             break
-
 
 main()
