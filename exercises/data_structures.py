@@ -1,4 +1,6 @@
-def str_reverse(s) -> str:
+def str_reverse(s):
+    if s == None:
+        return ""
     if len(s) <= 1:
         return s
 
@@ -8,8 +10,8 @@ def str_reverse(s) -> str:
 
     half2 = str_reverse(s[m:])
 
-
     return half2 + half1
+
 
 class Queue:
     def __init__(self):
@@ -30,6 +32,7 @@ class Queue:
         k = self.front()
         self.data = self.data[1:]
         return k
+
 
 def solve_maze(map, start, end) -> list:
     que = Queue()
@@ -62,22 +65,22 @@ def solve_maze(map, start, end) -> list:
             if i not in parent:
 
                 if map[i[0]][i[1]] == False:
-
                     parent[i] = now
                     que.enqueue(i)
+    print("Path is impossible")
 
 
 def main():
     map = [
-        [False, False, True, False],
-        [False, False, True, False],
-        [False, False, True, False],
-        [False, True, True, False],
-        [False, False, False, False]
+        [False, False, False, True, False],
+        [False, True, True, False, True],
+        [False, False, True, False, False],
+        [False, True, True, True, False],
+        [False, False, False, False, False]
     ]
     while True:
         start1, start2 = input("start, (y, x): ").split(", ")
-        end1, end2 = input("end, (y, x): ").split(", ")
+        end1, end2 =input("end,   (y, x): ").split(", ")
 
         start1 = int(start1)
         start2 = int(start2)
@@ -93,4 +96,6 @@ def main():
         else:
             print(str_reverse(solve_maze(map, start, end)))
             break
+
+
 main()
