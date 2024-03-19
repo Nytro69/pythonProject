@@ -26,7 +26,7 @@ def solve_maze(map, start, end) -> list:
     que.enqueue(start)
 
     parent = {}
-    parent[tuple(start)] = start
+    parent[start] = start
 
     while not que.is_empty():
         now = que.dequeue()
