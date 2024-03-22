@@ -31,17 +31,12 @@ Unknown:
 
 
 """
+sed = 7
+torch.manual_seed(seed=sed)
+f = torch.rand(1, 7)
 
+seed = torch.manual_seed(seed=sed)
+g = torch.rand(1, 7).T
 
-z1 = torch.tensor([[1, 6]])
-print(z1.squeeze())
+print(f in g)
 
-x = np.zeros((5, 5))
-
-x[0, :] = 1
-x[:, 0] = 1
-x[4, :] = 1
-x[:, 4] = 1
-x[2, 2] = 9
-
-print(x)

@@ -36,6 +36,16 @@ def guess(a: int, b: int, c: int):
     print(b + c)
 
 guess(1, 3, 5)
+
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+# Test the function
+num = int(input("Enter a number to calculate its factorial: "))
+print("Factorial of", num, "is", factorial(num))
 # 1- primitives
 # 2- means of combination
 # 3- means of abstraction
