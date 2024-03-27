@@ -36,7 +36,10 @@ torch.manual_seed(seed=sed)
 f = torch.rand(1, 7)
 
 seed = torch.manual_seed(seed=sed)
-g = torch.rand(1, 7).T
+g = torch.rand(1, 7)
+print(f"{f}\n{g}")
 
-print(f in g)
+print(f == g)
+
+print(torch.argmin(f))
 

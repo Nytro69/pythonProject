@@ -1,15 +1,20 @@
 """
-Libraries to learn:
+"Libraries" to learn:
 
-dotenv
-pytorch
-numpy
-pandas
-requests
-pathlib
+OOP
+docker, send code to others
+cloud, run on external servers
+dotenv, store env keys
+pytorch, deep learning
+numpy, math
+pandas, math
+matplotlib, math visualization
+requests, https requests
+pathlib, Paths
 threading
-urllib.parse
-os
-datetime
-time
+urllib.parse, send url requests
+os, operating system
+datetime, getting time
+beautifulsoup, web scraping from html
+SQL
 """

@@ -45,7 +45,36 @@ def factorial(n):
 
 # Test the function
 num = int(input("Enter a number to calculate its factorial: "))
-print("Factorial of", num, "is", factorial(num))
+print("Factorial of", num, "is", factorial(num)
+
+def square(n, power):
+    if not power.isdigit():
+        return "no decimal powers"
+
+
+
+
+"""
+Variables and data types (integers, floats, strings)
+Basic arithmetic operations
+Print statements
+Input from users (using input())
+
+Introduce conditionals (if, elif, else).
+Explain loops (for and while).
+
+Explain what functions are and why they’re essential.
+Teach students how to define and call functions.
+
+Create simple functions (e.g., a function to calculate the area of a rectangle).
+
+Cover lists (arrays) and their manipulation.
+Show how to iterate through lists using loops.
+
+Creating ASCII art.
+
+csv files? (if good enough)
+"""
 # 1- primitives
 # 2- means of combination
 # 3- means of abstraction
