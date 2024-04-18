@@ -8,7 +8,7 @@ dotenv, store env keys
 pytorch, deep learning
 numpy, math
 pandas, math
-matplotlib, math visualization
+matplotlib and seaborn, math visualization
 requests, https requests
 pathlib, Paths
 threading
@@ -17,4 +17,8 @@ os, operating system
 datetime, getting time
 beautifulsoup, web scraping from html
 SQL
+scikitlearn
+opencv, computer vision
+pillow, image processing
+huggingface transformers
 """

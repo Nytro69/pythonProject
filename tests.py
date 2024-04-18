@@ -1,10 +1,20 @@
-def twoSum(nums, target):
-    for i in range(len(nums)):
-        for j in range(len(nums)):
-            if j == i:
-                continue
-            if nums[j] + nums[i] == target:
-                return [j, i]
-    print("No solution")
+def separate(string: str) -> str:
+    i = 0
+    h = 0
+    new = []
+    while i < len(string):
+        if i % 50 == 0 and i != 0:
+            h = 1
 
-print(twoSum([2, 7, 11, 15], 13))
+        if string[i].isspace() and h == 1:
+            new.append("\n")
+            h = 0
+            i += 1
+            continue
+        else:
+            new.append(string[i])
+            i += 1
+
+    return ''.join(new)
+
+print(separate("jag jag jag jag jag jag jag jag jag jag jag jag jag jag jag jag jag jag jag jag jag jag jag jag jag jag jag jag jag jag jag jag jag jag "))

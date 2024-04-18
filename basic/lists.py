@@ -10,3 +10,8 @@ if op == "*":
         x = x * i
 
 print(x)
+
+dict = {
+    "August": 1221,
+    "Zora": 8988
+}

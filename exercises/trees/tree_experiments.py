@@ -11,5 +11,3 @@ tree = Tree(3,
                       Tree(228)))
             )
 
-
-print(tree.height())

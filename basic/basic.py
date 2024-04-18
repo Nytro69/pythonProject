@@ -22,7 +22,7 @@ print(x + y)
 x = int(x)
 y = int(y)
 
-print(x / y)
+print(x + y)
 
 def hypiothenuse():
     ...

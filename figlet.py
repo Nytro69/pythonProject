@@ -31,13 +31,13 @@ def testargv():
         return False
 
 def font():
-    user = input("Input: ")
+    user = "nigger"
     figlet.setFont(font=sys.argv[2])
     print(figlet.renderText(user))
 
 
 def random_font():
-    user = input("Input: ")
+    user = "ham cheese and boobies let me suck those tiddies"
     rand = random.choice(figlet.getFonts())
     figlet.setFont(font=rand)
     print(figlet.renderText(user))
