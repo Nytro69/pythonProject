@@ -2,6 +2,10 @@ import openai
 import dotenv
 import os
 import sys
+from jp_vox import speak_jp
+
+def text_json(text):
+    return text['choices'][0]['message']['content']
 
 def separate(string: str) -> str:
     i = 0
@@ -28,10 +32,15 @@ dotenv.load_dotenv()
 z = os.getenv("API_KEY")
 
 openai.api_key = z
-
-chat_history = [{"role": "system", "content": "you feel strong affection towards the one talking to you, answer max in 3 sentances"},
-                {"role": "user", "content": "hi *smiles*"}]
-chat_history_options = [{"role": "system", "content": "you are going to generate an option to the prompt as if you were in a date and is trying to charm the other person, try to steer the conversation to something non-romantic, answer max in 2 sentances"}]
+if input("modify behavior? ") == "y":
+    chat_history = [{"role": "system",
+                     "content": f"{input("Talking ai: ")}, answer max in 3 sentances, if you've talked about the same thing three times; change the subject"},
+                    {"role": "user", "content": "hi"}]
+    chat_history_options = [{"role": "system", "content": f"{input("Options ai: ")}, answer max in 2 sentances"}]
+else:
+    chat_history = [{"role": "system", "content": "you are a user of chat-gpt try asking popular questions and don't act like an assistant, answer max in 3 sentances, if you've talked about the same thing three times; change the subject"},
+                    {"role": "user", "content": "hi"}]
+    chat_history_options = [{"role": "system", "content": "answer max in 2 sentances"}]
 
 while True:
     response = openai.ChatCompletion.create(
@@ -39,9 +48,14 @@ while True:
         messages=chat_history
     )
 
-    chat_history_options.append({"role": "user", "content": response['choices'][0]['message']['content']})
+    response = text_json(response)
 
-    print(f"\n{separate(f"{response['choices'][0]['message']['content']}")}\n\n")
+    chat_history_options.append({"role": "user", "content": response})
+
+
+    print(f"\n{separate(f"{response}")}\n")
+
+    speak_jp(response)
 
     one = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
@@ -57,18 +71,26 @@ while True:
         model="gpt-3.5-turbo",
         messages=chat_history_options
     )
-    one_s = separate(f"{one['choices'][0]['message']['content']}")
-    two_s = separate(f"{two['choices'][0]['message']['content']}")
-    three_s = separate(f"{three['choices'][0]['message']['content']}")
 
-    user = int(input(f"1: {one_s}\n\n2: {two_s}\n\n3: {three_s}\nYour choice: ").strip())
+    one = text_json(one)
+    two = text_json(two)
+    three = text_json(three)
+
+
+    one_s = separate(f"{one}")
+    two_s = separate(f"{two}")
+    three_s = separate(f"{three}")
+
+    user = int(input(f"1: {one_s}\n\n2: {two_s}\n\n3: {three_s}\n\n4: Own Answer\n\nYour choice: ").strip())
 
 
     if user == 1:
-        chat_history.append({"role": "user", "content": one['choices'][0]['message']['content']})
+        chat_history.append({"role": "user", "content": one})
     elif user == 2:
-        chat_history.append({"role": "user", "content": two['choices'][0]['message']['content']})
+        chat_history.append({"role": "user", "content": two})
     elif user == 3:
-        chat_history.append({"role": "user", "content": three['choices'][0]['message']['content']})
+        chat_history.append({"role": "user", "content": three})
+    elif user == 4:
+        chat_history.append({"role": "user", "content": input("Answer: ")})
     else:
         sys.exit("Invalid int")
