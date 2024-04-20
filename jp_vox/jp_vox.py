@@ -7,6 +7,7 @@ import requests
 import pathlib
 import hashlib
 import pygame
+import argparse
 
 def speak_jp(sentance):
     dotenv.load_dotenv()
@@ -16,7 +17,22 @@ def speak_jp(sentance):
 
     translator = deepl.Translator(deepl_key)
 
-    result = translator.translate_text(sentance, target_lang="JA").text
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('-target', type=str)
+    parser.add_argument('-source', type=str)
+    args = parser.parse_args()
+
+    if args.target == None:
+        target_lang = "JA"
+    else:
+        target_lang = args.target
+    if args.source == None:
+        source_lang = "EN"
+    else:
+        source_lang = args.source
+
+    result = translator.translate_text(sentance, source_lang=source_lang, target_lang=target_lang).text
 
     print(result)
 
@@ -50,7 +66,7 @@ def speak_jp(sentance):
         pygame.quit()
 
     else:
-        sys.exit(f"bad request: {request.status_code}")
+        print(f"bad request: {request.status_code}")
 
 if __name__ == "__main__":
     speak_jp(input("Text: "))

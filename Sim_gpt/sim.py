@@ -3,6 +3,7 @@ import dotenv
 import os
 import sys
 from jp_vox import speak_jp
+import argparse
 
 def text_json(text):
     return text['choices'][0]['message']['content']
@@ -26,13 +27,19 @@ def separate(string: str) -> str:
 
     return ''.join(new)
 
+parser = argparse.ArgumentParser()
+
+parser.add_argument('-m', type=str)
+args = parser.parse_args()
+
 
 dotenv.load_dotenv()
+
 
 z = os.getenv("API_KEY")
 
 openai.api_key = z
-if input("modify behavior? ") == "y":
+if args.m == "y":
     chat_history = [{"role": "system",
                      "content": f"{input("Talking ai: ")}, answer max in 3 sentances, if you've talked about the same thing three times; change the subject"},
                     {"role": "user", "content": "hi"}]
