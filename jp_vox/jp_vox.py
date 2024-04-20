@@ -9,7 +9,7 @@ import hashlib
 import pygame
 import argparse
 
-def speak_jp(sentance):
+def speak_jp(sentance, source="EN", target="JA"):
     dotenv.load_dotenv()
 
     voicevox_key = os.getenv('VOICEVOX_KEY')
@@ -17,22 +17,7 @@ def speak_jp(sentance):
 
     translator = deepl.Translator(deepl_key)
 
-    parser = argparse.ArgumentParser()
-
-    parser.add_argument('-target', type=str)
-    parser.add_argument('-source', type=str)
-    args = parser.parse_args()
-
-    if args.target == None:
-        target_lang = "JA"
-    else:
-        target_lang = args.target
-    if args.source == None:
-        source_lang = "EN"
-    else:
-        source_lang = args.source
-
-    result = translator.translate_text(sentance, source_lang=source_lang, target_lang=target_lang).text
+    result = translator.translate_text(sentance, source_lang=source, target_lang=target).text
 
     print(result)
 
@@ -40,7 +25,7 @@ def speak_jp(sentance):
 
     settings = urllib.parse.urlencode({
         "text": result,
-        "speaker": 13, # male: 13 female: 66, 20, 55, 73
+        "speaker": 66, # male: 13 female: 66, 20, 55, 73
         "emotion": 0,
         "pitch": 0,
         "intonationScale": 1,
@@ -69,4 +54,26 @@ def speak_jp(sentance):
         print(f"bad request: {request.status_code}")
 
 if __name__ == "__main__":
-    speak_jp(input("Text: "))
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('-target', type=str)
+    parser.add_argument('-source', type=str)
+    parser.add_argument('-text', type=str)
+    args = parser.parse_args()
+
+    if args.target == None:
+        target_lang = "JA"
+    else:
+        target_lang = args.target
+    if args.source == None:
+        source_lang = "EN"
+    else:
+        source_lang = args.source
+    if args.text == "y":
+        path = input("Path: ")
+        with open(path, "r") as f:
+            sentance = f.read()
+            print(sentance)
+        speak_jp(sentance, source=source_lang, target=target_lang)
+    else:
+        speak_jp(input("Text: "), source=source_lang, target=target_lang)

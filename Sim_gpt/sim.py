@@ -32,7 +32,6 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-m', type=str)
 args = parser.parse_args()
 
-
 dotenv.load_dotenv()
 
 
