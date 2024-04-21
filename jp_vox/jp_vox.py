@@ -50,6 +50,8 @@ def speak_jp(sentance, source="EN", target="JA"):
 
         pygame.quit()
 
+        os.remove(output_path)
+
     else:
         print(f"bad request: {request.status_code}")
 

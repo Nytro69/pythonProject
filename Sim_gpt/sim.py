@@ -4,6 +4,8 @@ import os
 import sys
 from jp_vox import speak_jp
 import argparse
+import threading
+import time
 
 def text_json(text):
     return text['choices'][0]['message']['content']
@@ -48,6 +50,18 @@ else:
                     {"role": "user", "content": "hi"}]
     chat_history_options = [{"role": "system", "content": "answer max in 2 sentances"}]
 
+def send(chat_history_=chat_history_options, role="Teenager"):
+    chat_history_.append({"role": "system", "content": f"talk/pose questions like {role}"})
+
+    thing = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=chat_history_options
+    )
+    chat_history_.pop()
+    thing = text_json(thing)
+    return thing
+
+
 while True:
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
@@ -61,31 +75,19 @@ while True:
 
     print(f"\n{separate(f"{response}")}\n")
 
-    speak_jp(response)
+    thread = threading.Thread(target=speak_jp, args=(response,))
 
-    one = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=chat_history_options
-    )
+    thread.start()
 
-    two = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=chat_history_options
-    )
-
-    three = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=chat_history_options
-    )
-
-    one = text_json(one)
-    two = text_json(two)
-    three = text_json(three)
-
+    one = send(chat_history_=chat_history_options, role="a Teenager")
+    two = send(chat_history_=chat_history_options, role="your trying to change the subject")
+    three = send(chat_history_=chat_history_options, role="ben shapiro")
 
     one_s = separate(f"{one}")
     two_s = separate(f"{two}")
     three_s = separate(f"{three}")
+
+    thread.join()
 
     user = int(input(f"1: {one_s}\n\n2: {two_s}\n\n3: {three_s}\n\n4: Own Answer\n\nYour choice: ").strip())
 
@@ -97,6 +99,6 @@ while True:
     elif user == 3:
         chat_history.append({"role": "user", "content": three})
     elif user == 4:
-        chat_history.append({"role": "user", "content": input("Answer: ")})
+        chat_history.append({"role": "user", "content": input("Answer: ").strip()})
     else:
         sys.exit("Invalid int")
