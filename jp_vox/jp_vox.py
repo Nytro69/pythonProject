@@ -1,6 +1,5 @@
 import dotenv
 import os
-import sys
 import deepl
 import urllib.parse
 import requests
@@ -25,7 +24,7 @@ def speak_jp(sentance, source="EN", target="JA"):
 
     settings = urllib.parse.urlencode({
         "text": result,
-        "speaker": 66, # male: 13 female: 66, 20, 55, 73
+        "speaker": 13, # male: 13 female: 66, 20, 55, 73
         "emotion": 0,
         "pitch": 0,
         "intonationScale": 1,

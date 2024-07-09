@@ -11,7 +11,7 @@ if op == "*":
 
 print(x)
 
-dict = {
-    "August": 1221,
-    "Zora": 8988
-}
+def example(n):
+    return n * n
+
+print(example(3))

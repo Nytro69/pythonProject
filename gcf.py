@@ -8,6 +8,8 @@ while k != "":
 
         a = int(a)
         b = int(b)
+        if a < b:
+            a, b = b, a
     except ValueError:
         continue
 
@@ -17,4 +19,4 @@ while k != "":
         return a
 
 
-    print(gcd(a, b))
+    print(f"{gcd(a, b)}, {a / gcd(a, b)}")

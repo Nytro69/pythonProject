@@ -1,0 +1,27 @@
+functions:
+
+.arange a range of numbers in a matrix
+.zeros_like everything into 0
+.ones_like everything into 1
+.tensor(dtype=float32) creating a tensor
++-*/ per element, tensor +-*/ num
+.mul = Multiplication
+.matmul, .mm = Matrix Multiplication, Rules: inner dimensions must match, outer dimensions chooses the size of the resulting matrix
+.add = Addition
+.rand random tensor of chosen dimensions
+.T changes dimensions of a matrix (x, y) -> (y, x)
+.min gets smallest value of a tensor
+.max gets largest value of a tensor
+.mean gets average value of a tensor (no int)
+.sum get sum of tensor
+.argmin gets index of smallest num
+.argmax gets index of largest num
+.reshape allows to add and change dimensions
+.view same as .reshape but changes the input to itself (except extra dimension) y = x.view -> y = x (x changes)
+.stack Concatenates a sequence of tensors along a new dimension. stack([2, 5], [4, 6]) -> [[2, 5], [4, 6]]
+.squeeze removes dimensions with 1 as the shape of the dimension [[[2, 4, 4]]] -> [2, 4, 4], shape: (1, 5) -> (5)
+.unsqueeze(dim=0) adds a dimension as dim= parameter ex dim=0 [2, 3] -> [[2, 3]] dim=1 [2, 3] -> [[2], [3]]
+.permute from size(x) = [4, 6, 8] x.permute(num = dim ->(0, 2, 1)) -> [4, 8, 6] # changes dim 0 -> 0, 1 -> 2, 2 -> 1. also changes value in original when changed
+[:, x, y], : means all elements in dimension
+Unknown:
+

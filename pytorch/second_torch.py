@@ -95,8 +95,8 @@ for i in range(epoch):
     with torch.inference_mode(): # 6
         y_prediction = model_1(X_test)
         loss_test = loss_fn_1(y_prediction, y_test) # 10
-        if i % 1000 == 0: # 11
-            print(f"epoch: {i} LossTest: {loss_test.item()}, Loss: {loss}") # 12
+        if i % 1000 == 0:
+            print(f"epoch: {i} LossTest: {loss_test.item()}, Loss: {loss}") # 11
 
 with torch.inference_mode():
     predictions = model_1(X_test)

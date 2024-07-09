@@ -5,7 +5,6 @@ import sys
 from jp_vox import speak_jp
 import argparse
 import threading
-import time
 
 def text_json(text):
     return text['choices'][0]['message']['content']
@@ -80,8 +79,8 @@ while True:
     thread.start()
 
     one = send(chat_history_=chat_history_options, role="a Teenager")
-    two = send(chat_history_=chat_history_options, role="your trying to change the subject")
-    three = send(chat_history_=chat_history_options, role="ben shapiro")
+    two = send(chat_history_=chat_history_options, role="stubborn person")
+    three = send(chat_history_=chat_history_options, role="your trying to change the subject")
 
     one_s = separate(f"{one}")
     two_s = separate(f"{two}")

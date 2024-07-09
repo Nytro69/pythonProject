@@ -45,7 +45,7 @@ def factorial(n):
 
 # Test the function
 num = int(input("Enter a number to calculate its factorial: "))
-print("Factorial of", num, "is", factorial(num)
+print("Factorial of", num, "is", factorial(num))
 
 def square(n, power):
     if not power.isdigit():
